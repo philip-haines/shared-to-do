@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_170718) do
+ActiveRecord::Schema.define(version: 2021_04_21_014613) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "communities", force: :cascade do |t|
     t.string "name"
@@ -19,8 +22,8 @@ ActiveRecord::Schema.define(version: 2021_04_20_170718) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "community_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "community_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_memberships_on_community_id"
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_170718) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer "community_id", null: false
+    t.bigint "community_id", null: false
     t.string "title"
     t.text "description"
     t.string "priority"
@@ -39,8 +42,8 @@ ActiveRecord::Schema.define(version: 2021_04_20_170718) do
   end
 
   create_table "user_tasks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "task_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
     t.boolean "completed"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
